@@ -7,7 +7,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  validator_forge: ^1.0.0
+  validator_forge: ^1.1.0
 ```
 
 Then, run flutter pub get to install the package.
@@ -62,7 +62,7 @@ This package provides a comprehensive set of validation functions to ensure your
 
 -  `requiredValidator(String? value)` Ensures that the field is not empty.
 
-- `customRegexValidator(String? value, String pattern, String errorMessage)`
+- `matchRegex(String? value, String pattern, String errorMessage)`
   Validates the field against a custom regular expression.
 
 - `emailValidator(String? value)`

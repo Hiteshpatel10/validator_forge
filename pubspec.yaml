@@ -1,6 +1,6 @@
 name: validator_forge
 description: A validator package to ease flutter form validation handling.
-version: 0.0.1
+version: 1.1.0
 homepage: https://github.com/Hiteshpatel10/validator_forge.git
 
 environment:

@@ -1,78 +1,93 @@
 import 'package:validator_forge/validator_regex_pattern.dart';
 
 class Validators {
-  static String? requiredValidator(String? value) {
+  // Validator for required fields
+  static String? required(String? value, {String? errorMessage}) {
     if (value == null || value.isEmpty) {
-      return 'This field is required';
+      return errorMessage ?? 'This field is required';
     }
     return null;
   }
 
-  static String? customRegexValidator(String? value, String pattern, String errorMessage) {
+  // Validator for matching custom regular expressions
+  static String? matchRegex(String? value, String pattern, {String? errorMessage}) {
     final regex = RegExp(pattern);
     if (!regex.hasMatch(value ?? '')) {
-      return errorMessage;
+      return errorMessage ?? 'Invalid input';
     }
     return null;
   }
 
-  static String? emailValidator(String? value) {
-    return customRegexValidator(value, ValidatorRegexPattern.email, 'Invalid email address');
+  // Validator for email format
+  static String? email(String? value, {String? errorMessage}) {
+    return matchRegex(value, ValidatorRegexPattern.email, errorMessage: errorMessage ?? 'Invalid email address');
   }
 
-  static String? phoneValidator(String? value) {
-    return customRegexValidator(value, r'^\d{10}$', 'Invalid phone number');
+  // Validator for phone number (10 digits)
+  static String? phone(String? value, {String? errorMessage}) {
+    return matchRegex(value, r'^\d{10}$', errorMessage: errorMessage ?? 'Invalid phone number');
   }
 
-  static String? urlValidator(String? value) {
-    return customRegexValidator(value, ValidatorRegexPattern.url, 'Invalid URL');
+  // Validator for URLs
+  static String? url(String? value, {String? errorMessage}) {
+    return matchRegex(value, ValidatorRegexPattern.url, errorMessage: errorMessage ?? 'Invalid URL');
   }
 
-  static String? passwordValidator(String? value) {
+  // Validator for password length (min 8 characters)
+  static String? password(String? value, {String? errorMessage}) {
     if (value == null || value.length < 8) {
-      return 'Password must be at least 8 characters long';
+      return errorMessage ?? 'Password must be at least 8 characters long';
     }
     return null;
   }
 
-  static String? minLengthValidator(String? value, int minLength) {
+  // Validator for minimum length
+  static String? minLength(String? value, int minLength, {String? errorMessage}) {
     if (value == null || value.length < minLength) {
-      return 'Minimum length is $minLength characters';
+      return errorMessage ?? 'Minimum length is $minLength characters';
     }
     return null;
   }
 
-  static String? maxLengthValidator(String? value, int maxLength) {
+  // Validator for maximum length
+  static String? maxLength(String? value, int maxLength, {String? errorMessage}) {
     if (value != null && value.length > maxLength) {
-      return 'Maximum length is $maxLength characters';
+      return errorMessage ?? 'Maximum length is $maxLength characters';
     }
     return null;
   }
 
-  static String? numberValidator(String? value) {
-    return customRegexValidator(value, r'^-?\d+(\.\d+)?$', 'Invalid number');
+  // Validator for numeric values
+  static String? number(String? value, {String? errorMessage}) {
+    return matchRegex(value, ValidatorRegexPattern.signedDecimalValidator, errorMessage: errorMessage ?? 'Invalid number');
   }
 
-  static String? matchValidator(String? value, String? compareTo) {
+  // Validator to check if two values match
+  static String? match<T>(T? value, T? compareTo, {String? errorMessage}) {
     if (value != compareTo) {
-      return 'Values do not match';
+      return errorMessage ?? 'Values do not match';
     }
     return null;
   }
 
-  static String? dateValidator(String? value) {
-    return customRegexValidator(value, r'^\d{4}-\d{2}-\d{2}$', 'Invalid date format (YYYY-MM-DD)');
+  // Validator for date format (YYYY-MM-DD)
+  static String? date(String? value, {String? errorMessage}) {
+    return matchRegex(value, r'^\d{4}-\d{2}-\d{2}$', errorMessage: errorMessage ?? 'Invalid date format (YYYY-MM-DD)');
   }
 
-  static String? minimum(num? value, {required num min}) {
+  // Validator for minimum numeric value
+  static String? minimum(num? value, num min, {String? errorMessage}) {
     if (value == null || value < min) {
-      return 'Minimum value $min';
+      return errorMessage ?? 'Minimum value is $min';
     }
+    return null;
   }
 
-  static String? maximum(num? value, {required num max}) {
+  // Validator for maximum numeric value
+  static String? maximum(num? value, num max, {String? errorMessage}) {
     if (value == null || value > max) {
-      return 'Maximum value $max';
+      return errorMessage ?? 'Maximum value is $max';
     }
+    return null;
   }
 }
