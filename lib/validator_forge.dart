@@ -1,4 +1,6 @@
 library validator_forge;
 
-export 'validator_builder.dart';
-export 'validator_forge.dart';
+export 'src/validator_builder.dart';
+export 'src/validators.dart';
+export 'src/validator_regex_pattern.dart';
+

@@ -7,7 +7,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  validator_forge: ^1.1.0
+  validator_forge: ^1.0.0
 ```
 
 Then, run flutter pub get to install the package.
